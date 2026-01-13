@@ -40,11 +40,13 @@ public class BasicGameApp implements Runnable {
 	public BufferStrategy bufferStrategy;
 	public Image chickenlittlePic;
     public Image AbbyMallardPic;
+    public Image FishPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Chickenlittle chicklil;
     private AbbyMallard AbbyM;
+    private Fish Fishy;
 
 
    // Main method definition
@@ -69,11 +71,15 @@ public class BasicGameApp implements Runnable {
 		chicklil = new Chickenlittle(10,100);
         AbbyMallardPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png");
         AbbyM = new AbbyMallard(400, 200);
+        FishPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png");
+        Fishy = new Fish(300,200);
 
 
 
 
-	}// BasicGameApp()
+
+
+    }// BasicGameApp()
 
    
 //*******************************************************************************
