@@ -41,12 +41,14 @@ public class BasicGameApp implements Runnable {
 	public Image chickenlittlePic;
     public Image AbbyMallardPic;
     public Image FishPic;
+    public Image BackgroundPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Chickenlittle chicklil;
     private AbbyMallard AbbyM;
     private Fish Fishy;
+
 
 
    // Main method definition
@@ -62,19 +64,31 @@ public class BasicGameApp implements Runnable {
    // This section is the setup portion of the program
    // Initialize your variables and construct your program objects here.
 	public BasicGameApp() {
-      
-      setUpGraphics();
-       
+        setUpGraphics();
+
+        int randx =
+
+        randx = (int)(Math.random()*999)+ 1;
+
+        int randy = (int)(Math.random()*699)+1;
+
+
+
+
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 		chickenlittlePic = Toolkit.getDefaultToolkit().getImage("chickenlittle.png"); //load the picture
 		chicklil = new Chickenlittle(10,100);
         AbbyMallardPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png");
         AbbyM = new AbbyMallard(400, 200);
-        FishPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png");
-        Fishy = new Fish(300,200);
+        FishPic = Toolkit.getDefaultToolkit().getImage("Fish.png");
+        Fishy = new Fish(300,400);
+        BackgroundPic = Toolkit.getDefaultToolkit().getImage("Fence.png");
 
-
+        chicklil = new Chickenlittle(WIDTH/2,HEIGHT/2);
+        AbbyM = new AbbyMallard(randx, randy);
+        AbbyM.dx = -AbbyM.dx;
+        Fishy = new Fish(200, 100);
 
 
 
@@ -106,9 +120,25 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 		chicklil.move();
         AbbyM.move();
+        Fishy.move();
+        crashing();
 
 	}
-	
+
+    public void crashing (){
+        if (chicklil.hitbox.intersects(AbbyM.hitbox)) {
+            System.out.println("CRASH!");
+            chicklil.dx = -chicklil.dx;
+            AbbyM.dx = -AbbyM.dx;
+            AbbyM.isAlive = false;
+
+        }
+
+    }
+
+
+
+
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
    		//sleep
@@ -156,8 +186,11 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
-		g.drawImage(chickenlittlePic, chicklil.xpos, chicklil.ypos, chicklil.width, chicklil.height, null);
+        g.drawImage(BackgroundPic, 0, 0,WIDTH, HEIGHT, null);
+        g.drawImage(chickenlittlePic, chicklil.xpos, chicklil.ypos, chicklil.width, chicklil.height, null);
         g.drawImage(AbbyMallardPic, AbbyM.xpos, AbbyM.ypos, AbbyM.width, AbbyM.height, null);
+        g.drawImage(FishPic,Fishy.xpos, Fishy.ypos, Fishy.width, Fishy.height, null);
+
 
 		g.dispose();
 

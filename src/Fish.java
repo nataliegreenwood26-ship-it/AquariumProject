@@ -24,13 +24,13 @@ public class Fish {
 
         //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
         // if you put in a String, an int and an int the program will use this constructor instead of the one above.
-        public Chickenlittle(int pXpos, int pYpos) {
+        public Fish(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
             dx =1;
             dy =0;
-            width = 300;
-            height = 300;
+            width = 100;
+            height = 100;
             isAlive = true;
 
         } // constructor

@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * Created by chales on 11/6/2017.
  */
@@ -12,8 +14,9 @@ public class Chickenlittle {
     public int dy;                    //the speed of the hero in the y direction
     public int width;
     public int height;
-    public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
-
+    public boolean isAlive;//a boolean to denote if the hero is alive or dead.
+    public Rectangle hitbox;
+    public boolean isCrashing;
 
     // METHOD DEFINITION SECTION
 
@@ -28,9 +31,11 @@ public class Chickenlittle {
         ypos = pYpos;
         dx =1;
         dy =0;
-        width = 300;
-        height = 300;
+        width = 100;
+        height = 100;
         isAlive = true;
+        hitbox = new Rectangle(xpos, ypos, width, height);
+        isCrashing = false;
  
     } // constructor
 
@@ -38,7 +43,19 @@ public class Chickenlittle {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
- 
+        hitbox = new Rectangle(xpos, ypos,width, height);
+
+        if(xpos < 0){
+            dx= -dx;
+        }
+
+        if(ypos < 0){
+            dy = -dy;
+        }
+
+        if(ypos >= 700-height){
+            dy = -dy;
+        }
     }
 }
 
