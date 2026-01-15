@@ -30,8 +30,8 @@ public class AbbyMallard {
         public AbbyMallard(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =1;
-            dy =0;
+            dx =7;
+            dy =7;
             width = 100;
             height = 100;
             isAlive = true;
@@ -48,6 +48,10 @@ public class AbbyMallard {
 
             if(xpos < 0){
                 dx = -dx;
+            }
+            if(xpos >= 800-width) {
+                dx = -dx;
+
             }
             if(ypos < 0) {
                 dy = -dy;
