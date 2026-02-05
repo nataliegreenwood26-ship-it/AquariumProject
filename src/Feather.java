@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Feather {
 
         //VARIABLE DECLARATION SECTION
@@ -10,6 +12,7 @@ public class Feather {
         public int width;
         public int height;
         public boolean isAlive;//a boolean to denote if the hero is alive or dead.
+    public Rectangle hitbox;
         public boolean isCrashing;
 
         // METHOD DEFINITION SECTION
@@ -28,6 +31,8 @@ public class Feather {
             width = 100;
             height = 100;
             isAlive = true;
+            hitbox = new Rectangle(xpos, ypos, width, height);
+
             isCrashing = false;
 
         } // constructor
@@ -36,6 +41,8 @@ public class Feather {
         public void move() {
             xpos = xpos + dx;
             ypos = ypos + dy;
+            hitbox = new Rectangle(xpos, ypos,width, height);
+
 
             if(xpos < 0){
                 dx= -dx;

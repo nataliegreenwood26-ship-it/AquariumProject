@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Fish {
     /**
      * Created by chales on 11/6/2017.
@@ -36,12 +38,31 @@ public class Fish {
         } // constructor
 
         //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
-        public void move() {
-            xpos = xpos + dx;
-            ypos = ypos + dy;
+
+
+    public void move() {
+        xpos = xpos + dx;
+        ypos = ypos + dy;
+
+        if(xpos < 0){
+            dx = -dx;
+        }
+        if(xpos >= 800-width) {
+            dx = -dx;
 
         }
+        if(ypos < 0) {
+            dy = -dy;
+        }
+
+        if(ypos >= 700-height){
+            dy = -dy;
+        }
+
+
     }
+}
+
 
 
 
