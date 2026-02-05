@@ -42,12 +42,14 @@ public class BasicGameApp implements Runnable {
     public Image AbbyMallardPic;
     public Image FishPic;
     public Image BackgroundPic;
+    public Image Featherpic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Chickenlittle chicklil;
     private AbbyMallard AbbyM;
     private Fish Fishy;
+    private Feather Feathery;
 
 
 
@@ -84,11 +86,14 @@ public class BasicGameApp implements Runnable {
         FishPic = Toolkit.getDefaultToolkit().getImage("Fish.png");
         Fishy = new Fish(300,400);
         BackgroundPic = Toolkit.getDefaultToolkit().getImage("Fence.png");
+        Featherpic = Toolkit.getDefaultToolkit().getImage("Feather.png");
+        Feathery = new Feather(100,250);
 
         chicklil = new Chickenlittle(WIDTH/2,HEIGHT/2);
         AbbyM = new AbbyMallard(randx, randy);
         AbbyM.dx = -AbbyM.dx;
         Fishy = new Fish(200, 100);
+        Feathery = new Feather (randx, randy);
 
 
 
@@ -121,6 +126,7 @@ public class BasicGameApp implements Runnable {
 		chicklil.move();
         AbbyM.move();
         Fishy.move();
+        Feathery.move();
         crashing();
 
 	}
@@ -190,9 +196,11 @@ public class BasicGameApp implements Runnable {
         g.drawImage(chickenlittlePic, chicklil.xpos, chicklil.ypos, chicklil.width, chicklil.height, null);
         g.drawImage(AbbyMallardPic, AbbyM.xpos, AbbyM.ypos, AbbyM.width, AbbyM.height, null);
         g.drawImage(FishPic,Fishy.xpos, Fishy.ypos, Fishy.width, Fishy.height, null);
+        g.drawImage(Featherpic,Feathery.xpos, Feathery.ypos, Feathery.width, Feathery.height, null);
 
 
-		g.dispose();
+
+        g.dispose();
 
 		bufferStrategy.show();
 	}
