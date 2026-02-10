@@ -43,6 +43,9 @@ public class BasicGameApp implements Runnable {
     public Image FishPic;
     public Image BackgroundPic;
     public Image Featherpic;
+    public Image spaceshippic;
+
+
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
@@ -50,6 +53,8 @@ public class BasicGameApp implements Runnable {
     private AbbyMallard AbbyM;
     private Fish Fishy;
     private Feather Feathery;
+    private Spaceship Spaceshippy;
+
 
 
 
@@ -88,12 +93,15 @@ public class BasicGameApp implements Runnable {
         BackgroundPic = Toolkit.getDefaultToolkit().getImage("Fence.png");
         Featherpic = Toolkit.getDefaultToolkit().getImage("Feather.png");
         Feathery = new Feather(100,250);
+        spaceshippic = Toolkit.getDefaultToolkit().getImage("Spaceship.png");
+        Spaceshippy = new Spaceship(500,150);
 
         chicklil = new Chickenlittle(WIDTH/2,HEIGHT/2);
         AbbyM = new AbbyMallard(randx, randy);
         AbbyM.dx = -AbbyM.dx;
         Fishy = new Fish(200, 100);
-        Feathery = new Feather (randx, randy);
+        Feathery = new Feather (100, 50);
+        Spaceshippy = new Spaceship(randx,randy);
 
 
 
@@ -127,6 +135,7 @@ public class BasicGameApp implements Runnable {
         AbbyM.move();
         Fishy.move();
         Feathery.move();
+        Spaceshippy.move();
         crashing();
 
 	}
@@ -197,6 +206,9 @@ public class BasicGameApp implements Runnable {
         g.drawImage(AbbyMallardPic, AbbyM.xpos, AbbyM.ypos, AbbyM.width, AbbyM.height, null);
         g.drawImage(FishPic,Fishy.xpos, Fishy.ypos, Fishy.width, Fishy.height, null);
         g.drawImage(Featherpic,Feathery.xpos, Feathery.ypos, Feathery.width, Feathery.height, null);
+        g.drawImage(spaceshippic,Spaceshippy.xpos, Spaceshippy.ypos, Spaceshippy.width, Spaceshippy.height, null);
+
+
 
 
 

@@ -31,8 +31,8 @@ public class Fish {
             ypos = pYpos;
             dx =5;
             dy =2;
-            width = 100;
-            height = 100;
+            width = 180;
+            height = 180;
             isAlive = true;
 
         } // constructor

@@ -28,8 +28,8 @@ public class Feather {
         ypos = pYpos;
         dx = 8;
         dy = 2;
-        width = 100;
-        height = 100;
+        width = 180;
+        height = 180;
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);
 

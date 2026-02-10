@@ -1,9 +1,9 @@
 import java.awt.*;
 
-public class AbbyMallard {
-    /**
-     * Created by chales on 11/6/2017.
-     */
+public class Spaceship {
+        /**
+         * Created by chales on 11/6/2017.
+         */
 
         //VARIABLE DECLARATION SECTION
         //Here's where you state which variables you are going to use.
@@ -27,13 +27,13 @@ public class AbbyMallard {
 
         //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
         // if you put in a String, an int and an int the program will use this constructor instead of the one above.
-        public AbbyMallard(int pXpos, int pYpos) {
+        public Spaceship(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =7;
-            dy =7;
-            width = 180;
-            height = 180;
+            dx =1;
+            dy =0;
+            width = 400;
+            height = 200;
             isAlive = true;
             hitbox = new Rectangle(xpos,ypos,width,height);
             isCrashing = false;
@@ -42,28 +42,30 @@ public class AbbyMallard {
 
         //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
         public void move() {
+            if (xpos >= 1000) {
+                xpos = -xpos;
+                ypos = -ypos;
+            }
+
+            if (xpos > 0){
+                xpos = 999-width;
+            }
+
             xpos = xpos + dx;
             ypos = ypos + dy;
-            hitbox = new Rectangle(xpos,ypos,width,height);
+            hitbox = new Rectangle(xpos, ypos, width, height);
 
-            if(xpos < 0){
-                dx = -dx;
+
+            if (ypos <= 0) {
+                ypos = 699;
             }
-            if(xpos >= 1000-width) {
-                dx = -dx;
+            if (ypos >= 700) {
+                ypos = 1;
 
             }
-            if(ypos < 0) {
-                dy = -dy;
-            }
-
-            if(ypos >= 700-height){
-                dy = -dy;
-            }
-
-
         }
-    }
+        }
+
 
 
 
