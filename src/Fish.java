@@ -47,7 +47,7 @@ public class Fish {
         if(xpos < 0){
             dx = -dx;
         }
-        if(xpos >= 800-width) {
+        if(xpos >= 1000-width) {
             dx = -dx;
 
         }

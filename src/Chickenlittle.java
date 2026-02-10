@@ -49,7 +49,7 @@ public class Chickenlittle {
             dx= -dx;
         }
 
-        if(xpos >= 800-width) {
+        if(xpos >= 1000-width) {
             dx = -dx;
 
         }
@@ -60,6 +60,12 @@ public class Chickenlittle {
         if(ypos >= 700-height){
             dy = -dy;
         }
+
+
+
+
+
+
     }
 }
 
