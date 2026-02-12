@@ -42,14 +42,7 @@ public class Spaceship {
 
         //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
         public void move() {
-            if (xpos >= 1000) {
-                xpos = -xpos;
-                ypos = -ypos;
-            }
 
-            if (xpos > 0){
-                xpos = 999-width;
-            }
 
             xpos = xpos + dx;
             ypos = ypos + dy;
@@ -57,7 +50,7 @@ public class Spaceship {
 
 
             if (ypos <= 0) {
-                ypos = 699;
+                ypos = 69;
             }
             if (ypos >= 700) {
                 ypos = 1;

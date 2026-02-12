@@ -101,7 +101,7 @@ public class BasicGameApp implements Runnable {
         AbbyM.dx = -AbbyM.dx;
         Fishy = new Fish(200, 100);
         Feathery = new Feather (100, 50);
-        Spaceshippy = new Spaceship(randx,randy);
+        Spaceshippy = new Spaceship(800,100);
 
 
 
