@@ -31,9 +31,9 @@ public class AbbyMallard {
             xpos = pXpos;
             ypos = pYpos;
             dx =7;
-            dy =7;
-            width = 180;
-            height = 180;
+            dy =8;
+            width = 100;
+            height = 100;
             isAlive = true;
             hitbox = new Rectangle(xpos,ypos,width,height);
             isCrashing = false;

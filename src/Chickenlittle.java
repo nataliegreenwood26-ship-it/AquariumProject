@@ -1,8 +1,4 @@
 import java.awt.*;
-
-/**
- * Created by chales on 11/6/2017.
- */
 public class Chickenlittle {
 
     //VARIABLE DECLARATION SECTION
@@ -31,7 +27,7 @@ public class Chickenlittle {
         ypos = pYpos;
         dx =8;
         dy =2;
-        width = 180;
+        width = 100;
         height = 180;
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);

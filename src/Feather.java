@@ -28,8 +28,8 @@ public class Feather {
         ypos = pYpos;
         dx = 8;
         dy = 2;
-        width = 180;
-        height = 180;
+        width = 100;
+        height = 100;
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);
 
@@ -39,27 +39,26 @@ public class Feather {
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
-        if (xpos >= 1000) {
-            xpos = -xpos;
-            ypos = -ypos;
-        }
-
-        if (xpos > 0){
-            xpos = 999-width;
-        }
-
         xpos = xpos + dx;
         ypos = ypos + dy;
         hitbox = new Rectangle(xpos, ypos, width, height);
 
-
-        if (ypos <= 0) {
-            ypos = 699;
+        if (xpos < 0) {
+           dx = -dx;
         }
-        if (ypos >= 700) {
-            ypos = 1;
 
+        if (xpos >= 1000 - width) {
+            dx = -dx;
         }
+
+        if (ypos < 0) {
+            dy = -dy;
+        }
+
+        if (ypos >=700 - height){
+            dy = -dy;
+        }
+
     }
 }
 

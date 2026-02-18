@@ -15,7 +15,9 @@ public class Fish {
         public int dy;                    //the speed of the hero in the y direction
         public int width;
         public int height;
-        public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
+        public boolean isAlive; //a boolean to denote if the hero is alive or dead.
+        public Rectangle hitbox;
+        public boolean isCrashing;
 
 
         // METHOD DEFINITION SECTION
@@ -29,11 +31,13 @@ public class Fish {
         public Fish(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =5;
+            dx =4;
             dy =2;
-            width = 180;
-            height = 180;
+            width = 100;
+            height = 100;
             isAlive = true;
+            hitbox = new Rectangle(xpos,ypos,width, height);
+            isCrashing = false;
 
         } // constructor
 
@@ -43,6 +47,7 @@ public class Fish {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
+        hitbox = new Rectangle(xpos,ypos,width,height);
 
         if(xpos < 0){
             dx = -dx;

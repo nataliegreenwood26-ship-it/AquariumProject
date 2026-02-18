@@ -85,23 +85,18 @@ public class BasicGameApp implements Runnable {
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 		chickenlittlePic = Toolkit.getDefaultToolkit().getImage("chickenlittle.png"); //load the picture
-		chicklil = new Chickenlittle(10,100);
         AbbyMallardPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png");
-        AbbyM = new AbbyMallard(400, 200);
         FishPic = Toolkit.getDefaultToolkit().getImage("Fish.png");
-        Fishy = new Fish(300,400);
         BackgroundPic = Toolkit.getDefaultToolkit().getImage("Fence.png");
         Featherpic = Toolkit.getDefaultToolkit().getImage("Feather.png");
-        Feathery = new Feather(100,250);
         spaceshippic = Toolkit.getDefaultToolkit().getImage("Spaceship.png");
-        Spaceshippy = new Spaceship(500,150);
 
         chicklil = new Chickenlittle(WIDTH/2,HEIGHT/2);
         AbbyM = new AbbyMallard(randx, randy);
-        AbbyM.dx = -AbbyM.dx;
-        Fishy = new Fish(200, 100);
-        Feathery = new Feather (100, 50);
-        Spaceshippy = new Spaceship(800,100);
+        Fishy = new Fish (200,100);
+        Feathery = new Feather(100,50);
+        Spaceshippy = new Spaceship(800,20);
+
 
 
 
@@ -131,27 +126,41 @@ public class BasicGameApp implements Runnable {
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		chicklil.move();
-        AbbyM.move();
-        Fishy.move();
-        Feathery.move();
+		if (chicklil.isAlive) chicklil.move();
+       if (AbbyM.isAlive) AbbyM.move();
+       if (Fishy.isAlive) Fishy.move();
+       if (Feathery.isAlive) Feathery.move();
         Spaceshippy.move();
         crashing();
 
 	}
 
-    public void crashing (){
-        if (chicklil.hitbox.intersects(AbbyM.hitbox)) {
+    public void crashing () {
+        if (chicklil.hitbox.intersects(Spaceshippy.hitbox)) {
             System.out.println("CRASH!");
             chicklil.dx = -chicklil.dx;
+            Spaceshippy.dx = -Spaceshippy.dx;
+            chicklil.isAlive = false;
+        }
+        if (AbbyM.hitbox.intersects(Spaceshippy.hitbox)){
             AbbyM.dx = -AbbyM.dx;
+            Spaceshippy.dx = -Spaceshippy.dx;
             AbbyM.isAlive = false;
-
+        }
+        if (Feathery.hitbox.intersects(Spaceshippy.hitbox)){
+            Feathery.dx = -Feathery.dx;
+            Spaceshippy.dx = -Spaceshippy.dx;
+            Feathery.isAlive = false;
+        }
+        if (Fishy.hitbox.intersects(Spaceshippy.hitbox)){
+            Fishy.dx = -Fishy.dx;
+            Spaceshippy.dx = -Spaceshippy.dx;
+            Fishy.isAlive = false;
         }
 
+
+
     }
-
-
 
 
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -202,12 +211,24 @@ public class BasicGameApp implements Runnable {
 
       //draw the image of the astronaut
         g.drawImage(BackgroundPic, 0, 0,WIDTH, HEIGHT, null);
-        g.drawImage(chickenlittlePic, chicklil.xpos, chicklil.ypos, chicklil.width, chicklil.height, null);
-        g.drawImage(AbbyMallardPic, AbbyM.xpos, AbbyM.ypos, AbbyM.width, AbbyM.height, null);
-        g.drawImage(FishPic,Fishy.xpos, Fishy.ypos, Fishy.width, Fishy.height, null);
-        g.drawImage(Featherpic,Feathery.xpos, Feathery.ypos, Feathery.width, Feathery.height, null);
+
+        if (chicklil.isAlive) {
+            g.drawImage(chickenlittlePic, chicklil.xpos, chicklil.ypos, chicklil.width, chicklil.height, null);
+        }
+
+        if (AbbyM.isAlive) {
+            g.drawImage(AbbyMallardPic, AbbyM.xpos, AbbyM.ypos, AbbyM.width, AbbyM.height, null);
+        }
+       if(Fishy.isAlive) {
+           g.drawImage(FishPic, Fishy.xpos, Fishy.ypos, Fishy.width, Fishy.height, null);
+       }
+       if(Feathery.isAlive) {
+           g.drawImage(Featherpic, Feathery.xpos, Feathery.ypos, Feathery.width, Feathery.height, null);
+       }
         g.drawImage(spaceshippic,Spaceshippy.xpos, Spaceshippy.ypos, Spaceshippy.width, Spaceshippy.height, null);
 
+       if (chicklil.isAlive == false && AbbyM.isAlive ==false && Fishy.isAlive == false && Feathery.isAlive == false){
+           g.drawImage(Toolkit.getDefaultToolkit().getImage("Final.png")
 
 
 

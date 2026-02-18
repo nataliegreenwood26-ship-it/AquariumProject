@@ -30,9 +30,9 @@ public class Spaceship {
         public Spaceship(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =1;
+            dx =3;
             dy =0;
-            width = 400;
+            width = 300;
             height = 200;
             isAlive = true;
             hitbox = new Rectangle(xpos,ypos,width,height);
@@ -42,21 +42,21 @@ public class Spaceship {
 
         //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
         public void move() {
-
-
             xpos = xpos + dx;
             ypos = ypos + dy;
-            hitbox = new Rectangle(xpos, ypos, width, height);
 
-
-            if (ypos <= 0) {
-                ypos = 69;
+            if (xpos > 1000) {
+                xpos = -width;
             }
-            if (ypos >= 700) {
-                ypos = 1;
 
+            if (ypos > 700){
+                ypos = 0;
             }
+
+            hitbox = new Rectangle(xpos,ypos,width,height);
         }
+
+
         }
 
 
