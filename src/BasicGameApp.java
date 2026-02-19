@@ -1,42 +1,22 @@
-//Basic Game Application
-//Version 2
-// Basic Object, Image, Movement
-// Astronaut moves to the right.
-// Threaded
-
-//K. Chun 8/2018
-
-//*******************************************************************************
-//Import Section
-//Add Java libraries needed for the game
-//import java.awt.Canvas;
-
-//Graphics Libraries
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-
-//*******************************************************************************
-// Class Definition Section
+//imports that we as a class downloaded into Java
 
 public class BasicGameApp implements Runnable {
+   //The variables that we use in the project are below
 
-   //Variable Definition Section
-   //Declare the variables used in the program 
-   //You can set their initial values too
-   
-   //Sets the width and height of the program window
-	final int WIDTH = 1000;
-	final int HEIGHT = 700;
+	final int WIDTH = 1000; //width of window
+	final int HEIGHT = 700; //height of window
 
-   //Declare the variables needed for the graphics
+   //More variables declared
 	public JFrame frame;
 	public Canvas canvas;
-   public JPanel panel;
-   
+    public JPanel panel;
+
+    //Variables below for all of our photos to import
 	public BufferStrategy bufferStrategy;
 	public Image chickenlittlePic;
     public Image AbbyMallardPic;
@@ -45,125 +25,97 @@ public class BasicGameApp implements Runnable {
     public Image Featherpic;
     public Image spaceshippic;
 
-
-
-   //Declare the objects used in the program
-   //These are things that are made up of more than one variable type
+   //These are the characters in the code. Each one has an object that is made for them.
 	private Chickenlittle chicklil;
     private AbbyMallard AbbyM;
     private Fish Fishy;
     private Feather Feathery;
     private Spaceship Spaceshippy;
 
-
-
-
-   // Main method definition
-   // This is the code that runs first and automatically
+   //This is the code that runs first when pressing run
 	public static void main(String[] args) {
-		BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
-		new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method  
+		BasicGameApp ex = new BasicGameApp();  //creates a new instance of the game
+		new Thread(ex).start(); //creates a thread & starts up the code in the run( ) method
 	}
 
-
-   // Constructor Method
-   // This has the same name as the class
-   // This section is the setup portion of the program
-   // Initialize your variables and construct your program objects here.
+   // Constructor Method Below
+   // Make the objects, and use variables from above.
 	public BasicGameApp() {
         setUpGraphics();
 
         int randx =
 
-        randx = (int)(Math.random()*999)+ 1;
+        randx = (int)(Math.random()*999)+ 1; // random position within the width of the window
 
-        int randy = (int)(Math.random()*699)+1;
-
-
+        int randy = (int)(Math.random()*699)+1; //random position within the height of the window
 
 
       //variable and objects
-      //create (construct) the objects needed for the game and load up 
 		chickenlittlePic = Toolkit.getDefaultToolkit().getImage("chickenlittle.png"); //load the picture
-        AbbyMallardPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png");
+        AbbyMallardPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png"); //load the picture
         FishPic = Toolkit.getDefaultToolkit().getImage("Fish.png");
         BackgroundPic = Toolkit.getDefaultToolkit().getImage("Fence.png");
         Featherpic = Toolkit.getDefaultToolkit().getImage("Feather.png");
         spaceshippic = Toolkit.getDefaultToolkit().getImage("Spaceship.png");
 
-        chicklil = new Chickenlittle(WIDTH/2,HEIGHT/2);
-        AbbyM = new AbbyMallard(randx, randy);
-        Fishy = new Fish (200,100);
-        Feathery = new Feather(100,50);
-        Spaceshippy = new Spaceship(800,20);
+        chicklil = new Chickenlittle(500,350); //creates chickenlittle object at that position
+        AbbyM = new AbbyMallard(randx, randy); //AbbyM appears somewhere random every single time the go buttton is pressed
+        Fishy = new Fish (100,500); //creates Fish object at that position
+        Feathery = new Feather(400,200);
+        Spaceshippy = new Spaceship(10,10);
 
-
-
-
-
-    }// BasicGameApp()
+    }
 
    
-//*******************************************************************************
-//User Method Section
-//
-// put your code to do things here.
 
-   // main thread
-   // this is the code that plays the game after you set things up
+
+   // looping method
 	public void run() {
-
-      //for the moment we will loop things forever.
 		while (true) {
 
          moveThings();  //move all the game objects
-         render();  // paint the graphics
-         pause(20); // sleep for 10 ms
+         render();  // draws all the objects
+         pause(20); // waits
 		}
 	}
 
 
 	public void moveThings()
 	{
-      //calls the move( ) code in the objects
-		if (chicklil.isAlive) chicklil.move();
+      //calls the move( ) code from the other object classes
+		if (chicklil.isAlive) chicklil.move(); //checks if each character is alive, if alive calls their move() method
        if (AbbyM.isAlive) AbbyM.move();
        if (Fishy.isAlive) Fishy.move();
        if (Feathery.isAlive) Feathery.move();
-        Spaceshippy.move();
+        Spaceshippy.move(); //always moves spaceship
         crashing();
 
 	}
 
     public void crashing () {
-        if (chicklil.hitbox.intersects(Spaceshippy.hitbox)) {
-            System.out.println("CRASH!");
+        //checks if any character hits the spaceship
+        // makes it so that when each character hits the spaceship they die
+
+        if (chicklil.isAlive && chicklil.hitbox.intersects(Spaceshippy.hitbox)) {
             chicklil.dx = -chicklil.dx;
-            Spaceshippy.dx = -Spaceshippy.dx;
             chicklil.isAlive = false;
         }
-        if (AbbyM.hitbox.intersects(Spaceshippy.hitbox)){
+        if (AbbyM.isAlive && AbbyM.hitbox.intersects(Spaceshippy.hitbox)){
             AbbyM.dx = -AbbyM.dx;
-            Spaceshippy.dx = -Spaceshippy.dx;
             AbbyM.isAlive = false;
         }
-        if (Feathery.hitbox.intersects(Spaceshippy.hitbox)){
+        if (Feathery.isAlive && Feathery.hitbox.intersects(Spaceshippy.hitbox)){
             Feathery.dx = -Feathery.dx;
-            Spaceshippy.dx = -Spaceshippy.dx;
             Feathery.isAlive = false;
         }
-        if (Fishy.hitbox.intersects(Spaceshippy.hitbox)){
+        if (Fishy.isAlive && Fishy.hitbox.intersects(Spaceshippy.hitbox)){
             Fishy.dx = -Fishy.dx;
-            Spaceshippy.dx = -Spaceshippy.dx;
             Fishy.isAlive = false;
         }
 
-
-
     }
 
-
-   //Pauses or sleeps the computer for the amount specified in milliseconds
+   //controls the game speed
    public void pause(int time ){
    		//sleep
 			try {
@@ -209,9 +161,11 @@ public class BasicGameApp implements Runnable {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draw the image of the astronaut
+      //draw the image of the background
         g.drawImage(BackgroundPic, 0, 0,WIDTH, HEIGHT, null);
 
+
+        //if objects are alive then draw their images
         if (chicklil.isAlive) {
             g.drawImage(chickenlittlePic, chicklil.xpos, chicklil.ypos, chicklil.width, chicklil.height, null);
         }
@@ -225,11 +179,19 @@ public class BasicGameApp implements Runnable {
        if(Feathery.isAlive) {
            g.drawImage(Featherpic, Feathery.xpos, Feathery.ypos, Feathery.width, Feathery.height, null);
        }
-        g.drawImage(spaceshippic,Spaceshippy.xpos, Spaceshippy.ypos, Spaceshippy.width, Spaceshippy.height, null);
+
+
+       //always draw the spaceship
+
+       g.drawImage(spaceshippic,Spaceshippy.xpos, Spaceshippy.ypos, Spaceshippy.width, Spaceshippy.height, null);
+
+
+       //the line below tells us that if all of the objects/characters are dead then a new image should flash on the screen
 
        if (chicklil.isAlive == false && AbbyM.isAlive ==false && Fishy.isAlive == false && Feathery.isAlive == false){
-           g.drawImage(Toolkit.getDefaultToolkit().getImage("Final.png")
+           g.drawImage(Toolkit.getDefaultToolkit().getImage("Alien.png"),0,0,1000,700, null);
 
+       }
 
 
 
