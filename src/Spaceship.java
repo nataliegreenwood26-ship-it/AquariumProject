@@ -9,12 +9,8 @@ public class Spaceship {
     public int dy;                    //the speed of the object in the y direction
     public int width;
     public int height;
-    public boolean isAlive;
+    public boolean isAlive; //a boolean to denote if the object is alive or dead.
     public Rectangle hitbox; //created for collisions
-    public boolean isCrashing;//a boolean to denote if the object is alive or dead.
-
-
-
 
  //Constructor
     public Spaceship(int pXpos, int pYpos) {
@@ -26,15 +22,14 @@ public class Spaceship {
         height = 200;
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);
-        isCrashing = false;
 
     }
 
-    //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
+    //The move method.  Everytime this is run (or "called") the character's x position and y position change by dx and dy
     public void move() {
         xpos = xpos + dx;
 
-        //a wrapping effect is made below.
+        //a wrapping effect is made below. this is because when the character goes off the screen the position is changed to the opposite side to make a wrapping.
 
         if (xpos > 1000) {
             xpos = -width;

@@ -10,9 +10,8 @@ public class Fish {
         public int dy;                    //the speed of the object in the y direction
         public int width;
         public int height;
-        public boolean isAlive; //a boolean to denote if the hero is alive or dead.
+        public boolean isAlive; //a boolean to denote if the character is alive or dead.
         public Rectangle hitbox; //hitbox made for collisions
-        public boolean isCrashing;
 
 
         //constructor
@@ -25,18 +24,17 @@ public class Fish {
             height = 140;
             isAlive = true;
             hitbox = new Rectangle(xpos,ypos,width, height);
-            isCrashing = false;
 
         }
 
 
-    // The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
+    // The move method.  Everytime this is run (or "called") the character's x position and y position change by dx and dy
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
         hitbox = new Rectangle(xpos,ypos,width,height);
 
-        //made to show the object bouncing off the walls
+        //visual of the object bouncing off the walls by reversing direction (dx,dy) and looks like the character bounces.
 
         if(xpos < 0){
             dx = -dx;

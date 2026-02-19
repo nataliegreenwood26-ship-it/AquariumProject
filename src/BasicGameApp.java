@@ -25,7 +25,7 @@ public class BasicGameApp implements Runnable {
     public Image Featherpic;
     public Image spaceshippic;
 
-   //These are the characters in the code. Each one has an object that is made for them.
+   //These are the characters in the game. Each one has an object that is made for them.
 	private Chickenlittle chicklil;
     private AbbyMallard AbbyM;
     private Fish Fishy;
@@ -53,21 +53,18 @@ public class BasicGameApp implements Runnable {
       //variable and objects
 		chickenlittlePic = Toolkit.getDefaultToolkit().getImage("chickenlittle.png"); //load the picture
         AbbyMallardPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png"); //load the picture
-        FishPic = Toolkit.getDefaultToolkit().getImage("Fish.png");
-        BackgroundPic = Toolkit.getDefaultToolkit().getImage("Fence.png");
-        Featherpic = Toolkit.getDefaultToolkit().getImage("Feather.png");
-        spaceshippic = Toolkit.getDefaultToolkit().getImage("Spaceship.png");
+        FishPic = Toolkit.getDefaultToolkit().getImage("Fish.png"); //load the picture
+        BackgroundPic = Toolkit.getDefaultToolkit().getImage("Fence.png"); //load the picture
+        Featherpic = Toolkit.getDefaultToolkit().getImage("Feather.png"); //load the picture
+        spaceshippic = Toolkit.getDefaultToolkit().getImage("Spaceship.png"); //load the picture
 
-        chicklil = new Chickenlittle(500,350); //creates chickenlittle object at that position
-        AbbyM = new AbbyMallard(randx, randy); //AbbyM appears somewhere random every single time the go buttton is pressed
-        Fishy = new Fish (100,500); //creates Fish object at that position
-        Feathery = new Feather(400,200);
-        Spaceshippy = new Spaceship(10,10);
+        chicklil = new Chickenlittle(500,350); //creates chickenlittle object at that position (500,300)
+        AbbyM = new AbbyMallard(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
+        Fishy = new Fish (100,500); //creates Fish object at that position (100,500)
+        Feathery = new Feather(400,200); //creates object at position shown
+        Spaceshippy = new Spaceship(10,10); //creates object at position shown
 
     }
-
-   
-
 
    // looping method
 	public void run() {
@@ -79,16 +76,16 @@ public class BasicGameApp implements Runnable {
 		}
 	}
 
-
 	public void moveThings()
 	{
       //calls the move( ) code from the other object classes
-		if (chicklil.isAlive) chicklil.move(); //checks if each character is alive, if alive calls their move() method
+        //checks if each character is alive, if alive calls their move() method
+        if (chicklil.isAlive) chicklil.move();
        if (AbbyM.isAlive) AbbyM.move();
        if (Fishy.isAlive) Fishy.move();
        if (Feathery.isAlive) Feathery.move();
         Spaceshippy.move(); //always moves spaceship
-        crashing();
+        crashing(); //calls method
 
 	}
 
@@ -161,11 +158,11 @@ public class BasicGameApp implements Runnable {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draw the image of the background
+      //draws the image of the background
         g.drawImage(BackgroundPic, 0, 0,WIDTH, HEIGHT, null);
 
 
-        //if objects are alive then draw their images
+        //if objects are alive then draw their images, once they die make it so they dont show up on the screen
         if (chicklil.isAlive) {
             g.drawImage(chickenlittlePic, chicklil.xpos, chicklil.ypos, chicklil.width, chicklil.height, null);
         }
@@ -181,12 +178,12 @@ public class BasicGameApp implements Runnable {
        }
 
 
-       //always draw the spaceship
+       //always draw the spaceship because it never dies
 
        g.drawImage(spaceshippic,Spaceshippy.xpos, Spaceshippy.ypos, Spaceshippy.width, Spaceshippy.height, null);
 
 
-       //the line below tells us that if all of the objects/characters are dead then a new image should flash on the screen
+       //the line below tells us that if all of the objects/characters are dead (except spaceship) then a new image should flash on the screen
 
        if (chicklil.isAlive == false && AbbyM.isAlive ==false && Fishy.isAlive == false && Feathery.isAlive == false){
            g.drawImage(Toolkit.getDefaultToolkit().getImage("Alien.png"),0,0,1000,700, null);

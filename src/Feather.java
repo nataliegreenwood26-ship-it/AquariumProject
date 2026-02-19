@@ -10,9 +10,8 @@ public class Feather {
     public int dy;                    //the speed of the object in the y direction
     public int width;
     public int height;
-    public boolean isAlive;//a boolean to denote if the object is alive or dead.
+    public boolean isAlive;//a boolean to denote if the character is alive or dead.
     public Rectangle hitbox; //made for collisions
-    public boolean isCrashing;
 
     //constructor
     public Feather(int pXpos, int pYpos) {
@@ -25,18 +24,17 @@ public class Feather {
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);
 
-        isCrashing = false;
 
     }
 
-    //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
+    //The move method.  Everytime this is run (or "called") the character's x position and y position change by dx and dy
     public void move() {
 
             xpos = xpos + dx;
             ypos = ypos + dy;
             hitbox = new Rectangle(xpos, ypos, width, height);
 
-            //made below to show the character bouncing off the walls of the border
+        //visual of the object bouncing off the walls by reversing direction (dx,dy) and looks like the character bounces.
 
             if (xpos < 0) {
                 dx = -dx;
