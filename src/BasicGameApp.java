@@ -39,7 +39,7 @@ public class BasicGameApp implements Runnable {
 	}
 
    // Constructor Method Below
-   // Make the objects, and use variables from above.
+   // Make the objects, and define variables from above.
 	public BasicGameApp() {
         setUpGraphics();
 
