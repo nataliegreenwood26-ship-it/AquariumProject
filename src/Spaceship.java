@@ -16,7 +16,7 @@ public class Spaceship {
     public Spaceship(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 3;
+        dx = 4;
         dy = 0;
         width = 300;
         height = 200;

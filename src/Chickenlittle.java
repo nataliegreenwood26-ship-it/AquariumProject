@@ -19,8 +19,8 @@ public class Chickenlittle {
     public Chickenlittle(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =8;
-        dy =4;
+        dx =4 ;
+        dy =1;
         width = 140;
         height = 140;
         isAlive = true;

@@ -17,8 +17,8 @@ public class Feather {
     public Feather(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 4;
-        dy = 4;
+        dx = 2;
+        dy = 2;
         width = 140;
         height = 140;
         isAlive = true;

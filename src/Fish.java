@@ -18,8 +18,8 @@ public class Fish {
        public Fish(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =4;
-            dy =4;
+            dx =3;
+            dy =3;
             width = 140;
             height = 140;
             isAlive = true;

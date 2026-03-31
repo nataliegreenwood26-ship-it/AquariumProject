@@ -18,8 +18,8 @@ public class AbbyMallard {
         public AbbyMallard(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =4;
-            dy =6;
+            dx =3;
+            dy =4;
             width = 140;
             height = 140;
             isAlive = true;

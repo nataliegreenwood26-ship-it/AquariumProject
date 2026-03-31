@@ -54,11 +54,11 @@ public class BasicGameApp implements Runnable {
 		chickenlittlePic = Toolkit.getDefaultToolkit().getImage("chickenlittle.png"); //load the picture
         AbbyMallardPic = Toolkit.getDefaultToolkit().getImage("AbbyMallard.png"); //load the picture
         FishPic = Toolkit.getDefaultToolkit().getImage("Fish.png"); //load the picture
-        BackgroundPic = Toolkit.getDefaultToolkit().getImage("Fence.png"); //load the picture
+        BackgroundPic = Toolkit.getDefaultToolkit().getImage("CheckeredBackground.png"); //load the picture
         Featherpic = Toolkit.getDefaultToolkit().getImage("Feather.png"); //load the picture
         spaceshippic = Toolkit.getDefaultToolkit().getImage("Spaceship.png"); //load the picture
 
-        chicklil = new Chickenlittle(500,350); //creates chickenlittle object at that position (500,300)
+        chicklil = new Chickenlittle(200,350); //creates chickenlittle object at that position (500,300)
         AbbyM = new AbbyMallard(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
         Fishy = new Fish (100,500); //creates Fish object at that position (100,500)
         Feathery = new Feather(400,200); //creates object at position shown
