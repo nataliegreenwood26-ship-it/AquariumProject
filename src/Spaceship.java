@@ -18,7 +18,7 @@ public class Spaceship {
         ypos = pYpos;
         dx = 4;
         dy = 0;
-        width = 300;
+        width = 200;
         height = 200;
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);

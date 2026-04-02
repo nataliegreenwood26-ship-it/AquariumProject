@@ -21,8 +21,8 @@ public class Chickenlittle {
         ypos = pYpos;
         dx =4 ;
         dy =1;
-        width = 140;
-        height = 140;
+        width = 100;
+        height = 100;
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);
 

@@ -20,8 +20,8 @@ public class AbbyMallard {
             ypos = pYpos;
             dx =3;
             dy =4;
-            width = 140;
-            height = 140;
+            width = 100;
+            height = 100;
             isAlive = true;
             hitbox = new Rectangle(xpos,ypos,width,height);
 
