@@ -1,11 +1,15 @@
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 //imports that we as a class downloaded into Java
 
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, KeyListener, MouseListener {
    //The variables that we use in the project are below
 
 	final int WIDTH = 1000; //width of window
@@ -132,7 +136,12 @@ public class BasicGameApp implements Runnable {
    
       // creates a canvas which is a blank rectangular area of the screen onto which the application can draw
       // and trap input events (Mouse and Keyboard events)
-      canvas = new Canvas();  
+      canvas = new Canvas();
+       canvas.addKeyListener(this);
+       //set canvas as the mouselistener
+       canvas.addMouseListener(this);
+
+
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
    
@@ -196,4 +205,64 @@ public class BasicGameApp implements Runnable {
 
 		bufferStrategy.show();
 	}
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("Key typed"+e.getKeyCode());
+        //up arrow is 38
+        if(e.getKeyCode() == 38){
+            System.out.println("pressed up arrow");
+            Spaceshippy.dy = -2;
+        }
+        if(e.getKeyCode() == 40){
+            System.out.println("pressed down arrow");
+            Spaceshippy.dy = 2;
+        }
+
+        if(e.getKeyCode() == 37){
+            System.out.println("pressed left arrow");
+            Spaceshippy.dx = -Math.abs(Spaceshippy.dx);
+        }
+
+        if(e.getKeyCode() == 39){
+            System.out.println("pressed right arrow");
+            Spaceshippy.dx = Math.abs(Spaceshippy.dx);
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
