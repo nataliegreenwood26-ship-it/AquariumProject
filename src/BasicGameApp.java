@@ -221,7 +221,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         }
         if(e.getKeyCode() == 40){
             System.out.println("pressed down arrow");
-            Spaceshippy.dy = 2;
+            Spaceshippy.dy = -10;
         }
 
         if(e.getKeyCode() == 37){
