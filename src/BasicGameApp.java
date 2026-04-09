@@ -22,7 +22,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
     //Variables below for all of our photos to import
 	public BufferStrategy bufferStrategy;
-	public Image chickenlittlePic;
+    public Image applePic;
     public Image AbbyMallardPic;
     public Image FishPic;
     public Image BackgroundPic;
@@ -30,7 +30,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public Image spaceshippic;
 
    //These are the characters in the game. Each one has an object that is made for them.
-	private Chickenlittle chicklil;
+	private Chickenlittle apple;
     private AbbyMallard AbbyM;
     private Fish Fishy;
     private Feather Feathery;
@@ -55,14 +55,14 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 
       //variable and objects
-		chickenlittlePic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
+		applePic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         AbbyMallardPic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         FishPic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         BackgroundPic = Toolkit.getDefaultToolkit().getImage("CheckeredBackground.png"); //load the picture
         Featherpic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         spaceshippic = Toolkit.getDefaultToolkit().getImage("snake.png"); //load the picture
 
-        chicklil = new Chickenlittle(200,350); //creates chickenlittle object at that position (500,300)
+        apple = new Chickenlittle(200,350); //creates chickenlittle object at that position (500,300)
         AbbyM = new AbbyMallard(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
         Fishy = new Fish (100,500); //creates Fish object at that position (100,500)
         Feathery = new Feather(400,200); //creates object at position shown
@@ -84,7 +84,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 	{
       //calls the move( ) code from the other object classes
         //checks if each character is alive, if alive calls their move() method
-        if (chicklil.isAlive) chicklil.move();
+        if (apple.isAlive) apple.move();
        if (AbbyM.isAlive) AbbyM.move();
        if (Fishy.isAlive) Fishy.move();
        if (Feathery.isAlive) Feathery.move();
@@ -97,9 +97,9 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         //checks if any character hits the spaceship
         // makes it so that when each character hits the spaceship they die
 
-        if (chicklil.isAlive && chicklil.hitbox.intersects(Spaceshippy.hitbox)) {
-            chicklil.dx = -chicklil.dx;
-            chicklil.isAlive = false;
+        if (apple.isAlive && apple.hitbox.intersects(Spaceshippy.hitbox)) {
+            apple.dx = -apple.dx;
+            apple.isAlive = false;
         }
         if (AbbyM.isAlive && AbbyM.hitbox.intersects(Spaceshippy.hitbox)){
             AbbyM.dx = -AbbyM.dx;
@@ -172,8 +172,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 
         //if objects are alive then draw their images, once they die make it so they dont show up on the screen
-        if (chicklil.isAlive) {
-            g.drawImage(chickenlittlePic, chicklil.xpos, chicklil.ypos, chicklil.width, chicklil.height, null);
+        if (apple.isAlive) {
+            g.drawImage(applePic, apple.xpos, apple.ypos, apple.width, apple.height, null);
         }
 
         if (AbbyM.isAlive) {
@@ -194,7 +194,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
        //the line below tells us that if all of the objects/characters are dead (except spaceship) then a new image should flash on the screen
 
-       if (chicklil.isAlive == false && AbbyM.isAlive ==false && Fishy.isAlive == false && Feathery.isAlive == false){
+       if (apple.isAlive == false && AbbyM.isAlive ==false && Fishy.isAlive == false && Feathery.isAlive == false){
            g.drawImage(Toolkit.getDefaultToolkit().getImage("Alien.png"),0,0,1000,700, null);
 
        }
