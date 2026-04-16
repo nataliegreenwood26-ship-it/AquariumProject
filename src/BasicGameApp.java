@@ -27,14 +27,14 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public Image FishPic;
     public Image BackgroundPic;
     public Image Featherpic;
-    public Image spaceshippic;
+    public Image snakepic;
 
    //These are the characters in the game. Each one has an object that is made for them.
 	private Chickenlittle apple;
     private AbbyMallard AbbyM;
     private Fish Fishy;
     private Feather Feathery;
-    private Spaceship Spaceshippy;
+    private Snake Snakey;
 
    //This is the code that runs first when pressing run
 	public static void main(String[] args) {
@@ -60,13 +60,13 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         FishPic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         BackgroundPic = Toolkit.getDefaultToolkit().getImage("CheckeredBackground.png"); //load the picture
         Featherpic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
-        spaceshippic = Toolkit.getDefaultToolkit().getImage("snake.png"); //load the picture
+        snakepic = Toolkit.getDefaultToolkit().getImage("snake.png"); //load the picture
 
         apple = new Chickenlittle(200,350); //creates chickenlittle object at that position (500,300)
         AbbyM = new AbbyMallard(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
         Fishy = new Fish (100,500); //creates Fish object at that position (100,500)
         Feathery = new Feather(400,200); //creates object at position shown
-        Spaceshippy = new Spaceship(10,10); //creates object at position shown
+        Snakey = new Snake(10,10); //creates object at position shown
 
     }
 
@@ -88,7 +88,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
        if (AbbyM.isAlive) AbbyM.move();
        if (Fishy.isAlive) Fishy.move();
        if (Feathery.isAlive) Feathery.move();
-        Spaceshippy.move(); //always moves spaceship
+        Snakey.move(); //always moves spaceship
         crashing(); //calls method
 
 	}
@@ -97,19 +97,19 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         //checks if any character hits the spaceship
         // makes it so that when each character hits the spaceship they die
 
-        if (apple.isAlive && apple.hitbox.intersects(Spaceshippy.hitbox)) {
+        if (apple.isAlive && apple.hitbox.intersects(Snakey.hitbox)) {
             apple.dx = -apple.dx;
             apple.isAlive = false;
         }
-        if (AbbyM.isAlive && AbbyM.hitbox.intersects(Spaceshippy.hitbox)){
+        if (AbbyM.isAlive && AbbyM.hitbox.intersects(Snakey.hitbox)){
             AbbyM.dx = -AbbyM.dx;
             AbbyM.isAlive = false;
         }
-        if (Feathery.isAlive && Feathery.hitbox.intersects(Spaceshippy.hitbox)){
+        if (Feathery.isAlive && Feathery.hitbox.intersects(Snakey.hitbox)){
             Feathery.dx = -Feathery.dx;
             Feathery.isAlive = false;
         }
-        if (Fishy.isAlive && Fishy.hitbox.intersects(Spaceshippy.hitbox)){
+        if (Fishy.isAlive && Fishy.hitbox.intersects(Snakey.hitbox)){
             Fishy.dx = -Fishy.dx;
             Fishy.isAlive = false;
         }
@@ -189,7 +189,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
        //always draw the spaceship because it never dies
 
-       g.drawImage(spaceshippic,Spaceshippy.xpos, Spaceshippy.ypos, Spaceshippy.width, Spaceshippy.height, null);
+       g.drawImage(snakepic,Snakey.xpos, Snakey.ypos, Snakey.width, Snakey.height, null);
 
 
        //the line below tells us that if all of the objects/characters are dead (except spaceship) then a new image should flash on the screen
@@ -217,21 +217,21 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         //up arrow is 38
         if(e.getKeyCode() == 38){
             System.out.println("pressed up arrow");
-            Spaceshippy.dy = -2;
+            Snakey.dy = -2;
         }
         if(e.getKeyCode() == 40){
             System.out.println("pressed down arrow");
-            Spaceshippy.dy = -10;
+            Snakey.dy = -10;
         }
 
         if(e.getKeyCode() == 37){
             System.out.println("pressed left arrow");
-            Spaceshippy.dx = -Math.abs(Spaceshippy.dx);
+            Snakey.dx = -Math.abs(Snakey.dx);
         }
 
         if(e.getKeyCode() == 39){
             System.out.println("pressed right arrow");
-            Spaceshippy.dx = Math.abs(Spaceshippy.dx);
+            Snakey.dx = Math.abs(Snakey.dx);
         }
 
     }
