@@ -30,7 +30,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public Image snakepic;
 
    //These are the characters in the game. Each one has an object that is made for them.
-	private Chickenlittle apple;
+	private apple1 apple;
     private AbbyMallard AbbyM;
     private Fish Fishy;
     private Feather Feathery;
@@ -62,7 +62,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         Featherpic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         snakepic = Toolkit.getDefaultToolkit().getImage("snake.png"); //load the picture
 
-        apple = new Chickenlittle(200,350); //creates chickenlittle object at that position (500,300)
+        apple = new apple1(200,350); //creates chickenlittle object at that position (500,300)
         AbbyM = new AbbyMallard(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
         Fishy = new Fish (100,500); //creates Fish object at that position (100,500)
         Feathery = new Feather(400,200); //creates object at position shown

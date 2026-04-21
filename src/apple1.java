@@ -1,5 +1,5 @@
 import java.awt.*;
-public class Chickenlittle {
+public class apple1 {
     //name of the chickenlittle object class
 
     //VARIABLE DECLARATION SECTION
@@ -16,7 +16,7 @@ public class Chickenlittle {
 
 
     // Constructor
-    public Chickenlittle(int pXpos, int pYpos) {
+    public apple1(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
         dx =4 ;
