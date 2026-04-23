@@ -195,7 +195,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
        //the line below tells us that if all of the objects/characters are dead (except spaceship) then a new image should flash on the screen
 
        if (apple.isAlive == false && apple2.isAlive ==false && Fishy.isAlive == false && Feathery.isAlive == false){
-           g.drawImage(Toolkit.getDefaultToolkit().getImage("Alien.png"),0,0,1000,700, null);
+           g.drawImage(Toolkit.getDefaultToolkit().getImage("GameOver.png"),0,0,1000,700, null);
 
        }
 
