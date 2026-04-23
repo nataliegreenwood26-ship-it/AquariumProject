@@ -1,5 +1,5 @@
 import java.awt.*;
-public class Fish {
+public class apple3 {
 
         //VARIABLE DECLARATION SECTION
         //Here's where I state which variables I am going to use.
@@ -15,7 +15,7 @@ public class Fish {
 
 
         //constructor
-       public Fish(int pXpos, int pYpos) {
+       public apple3(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
             dx =3;

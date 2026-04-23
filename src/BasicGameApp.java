@@ -14,6 +14,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 	final int WIDTH = 1000; //width of window
 	final int HEIGHT = 700; //height of window
+    int score = 0;
 
    //More variables declared
 	public JFrame frame;
@@ -24,7 +25,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 	public BufferStrategy bufferStrategy;
     public Image applePic;
     public Image apple2Pic;
-    public Image FishPic;
+    public Image apple3Pic;
     public Image BackgroundPic;
     public Image Featherpic;
     public Image snakepic;
@@ -32,7 +33,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
    //These are the characters in the game. Each one has an object that is made for them.
 	private apple1 apple;
     private apple2 apple2;
-    private Fish Fishy;
+    private apple3 apple3;
     private Feather Feathery;
     private Snake Snakey;
 
@@ -57,14 +58,14 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
       //variable and objects
 		applePic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         apple2Pic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
-        FishPic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
+        apple3Pic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         BackgroundPic = Toolkit.getDefaultToolkit().getImage("CheckeredBackground.png"); //load the picture
         Featherpic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
         snakepic = Toolkit.getDefaultToolkit().getImage("snake.png"); //load the picture
 
         apple = new apple1(200,350); //creates chickenlittle object at that position (500,300)
         apple2 = new apple2(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
-        Fishy = new Fish (100,500); //creates Fish object at that position (100,500)
+        apple3 = new apple3 (100,500); //creates Fish object at that position (100,500)
         Feathery = new Feather(400,200); //creates object at position shown
         Snakey = new Snake(10,10); //creates object at position shown
 
@@ -86,7 +87,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         //checks if each character is alive, if alive calls their move() method
         if (apple.isAlive) apple.move();
        if (apple2.isAlive) apple2.move();
-       if (Fishy.isAlive) Fishy.move();
+       if (apple3.isAlive) apple3.move();
        if (Feathery.isAlive) Feathery.move();
         Snakey.move(); //always moves spaceship
         crashing(); //calls method
@@ -100,18 +101,22 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         if (apple.isAlive && apple.hitbox.intersects(Snakey.hitbox)) {
             apple.dx = -apple.dx;
             apple.isAlive = false;
+            score++;
         }
         if (apple2.isAlive && apple2.hitbox.intersects(Snakey.hitbox)){
             apple2.dx = -apple2.dx;
             apple2.isAlive = false;
+            score++;
         }
         if (Feathery.isAlive && Feathery.hitbox.intersects(Snakey.hitbox)){
             Feathery.dx = -Feathery.dx;
             Feathery.isAlive = false;
+            score++;
         }
-        if (Fishy.isAlive && Fishy.hitbox.intersects(Snakey.hitbox)){
-            Fishy.dx = -Fishy.dx;
-            Fishy.isAlive = false;
+        if (apple3.isAlive && apple3.hitbox.intersects(Snakey.hitbox)){
+            apple3.dx = -apple3.dx;
+            apple3.isAlive = false;
+            score++;
         }
 
     }
@@ -179,8 +184,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         if (apple2.isAlive) {
             g.drawImage(apple2Pic, apple2.xpos, apple2.ypos, apple2.width, apple2.height, null);
         }
-       if(Fishy.isAlive) {
-           g.drawImage(FishPic, Fishy.xpos, Fishy.ypos, Fishy.width, Fishy.height, null);
+       if(apple3.isAlive) {
+           g.drawImage(apple3Pic, apple3.xpos, apple3.ypos, apple3.width, apple3.height, null);
        }
        if(Feathery.isAlive) {
            g.drawImage(Featherpic, Feathery.xpos, Feathery.ypos, Feathery.width, Feathery.height, null);
@@ -194,15 +199,19 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
        //the line below tells us that if all of the objects/characters are dead (except spaceship) then a new image should flash on the screen
 
-       if (apple.isAlive == false && apple2.isAlive ==false && Fishy.isAlive == false && Feathery.isAlive == false){
+       if (apple.isAlive == false && apple2.isAlive ==false && apple3.isAlive == false && Feathery.isAlive == false){
            g.drawImage(Toolkit.getDefaultToolkit().getImage("GameOver.png"),0,0,1000,700, null);
 
        }
 
 
 
-        g.dispose();
 
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD,50));
+        g.drawString("Score:"+ score, 20, 40);
+
+        g.dispose();
 		bufferStrategy.show();
 	}
 
