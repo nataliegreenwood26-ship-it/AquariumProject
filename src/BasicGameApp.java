@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
+
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -5,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
+import java.lang.reflect.Array;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 //imports that we as a class downloaded into Java
@@ -16,6 +19,12 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 	final int HEIGHT = 700; //height of window
     int score = 0;
 
+    boolean applesquished = false;
+    boolean orangesquished = false;
+    boolean lemonsquished = false;
+    boolean blueberrysquished = false;
+
+
    //More variables declared
 	public JFrame frame;
 	public Canvas canvas;
@@ -24,18 +33,19 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     //Variables below for all of our photos to import
 	public BufferStrategy bufferStrategy;
     public Image applePic;
-    public Image apple2Pic;
-    public Image apple3Pic;
+    public Image orangepic;
+    public Image lemonpic;
     public Image BackgroundPic;
-    public Image Featherpic;
+    public Image blueberrypic;
     public Image snakepic;
 
    //These are the characters in the game. Each one has an object that is made for them.
 	private apple1 apple;
-    private apple2 apple2;
-    private apple3 apple3;
-    private Feather Feathery;
+    private orange orange;
+    private lemon lemon;
+    private blueberry blueberry;
     private Snake Snakey;
+
 
    //This is the code that runs first when pressing run
 	public static void main(String[] args) {
@@ -57,16 +67,16 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
       //variable and objects
 		applePic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
-        apple2Pic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
-        apple3Pic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
+        orangepic = Toolkit.getDefaultToolkit().getImage("orange.png"); //load the picture
+        lemonpic = Toolkit.getDefaultToolkit().getImage("lemon.png"); //load the picture
         BackgroundPic = Toolkit.getDefaultToolkit().getImage("CheckeredBackground.png"); //load the picture
-        Featherpic = Toolkit.getDefaultToolkit().getImage("apple.png"); //load the picture
+        blueberrypic = Toolkit.getDefaultToolkit().getImage("blueberry.png"); //load the picture
         snakepic = Toolkit.getDefaultToolkit().getImage("snake.png"); //load the picture
 
         apple = new apple1(200,350); //creates chickenlittle object at that position (500,300)
-        apple2 = new apple2(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
-        apple3 = new apple3 (100,500); //creates Fish object at that position (100,500)
-        Feathery = new Feather(400,200); //creates object at position shown
+        orange = new orange(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
+        lemon = new lemon (100,500); //creates Fish object at that position (100,500)
+        blueberry = new blueberry(400,200); //creates object at position shown
         Snakey = new Snake(10,10); //creates object at position shown
 
     }
@@ -86,9 +96,9 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
       //calls the move( ) code from the other object classes
         //checks if each character is alive, if alive calls their move() method
         if (apple.isAlive) apple.move();
-       if (apple2.isAlive) apple2.move();
-       if (apple3.isAlive) apple3.move();
-       if (Feathery.isAlive) Feathery.move();
+       if (orange.isAlive) orange.move();
+       if (lemon.isAlive) lemon.move();
+       if (blueberry.isAlive) blueberry.move();
         Snakey.move(); //always moves spaceship
         crashing(); //calls method
 
@@ -103,19 +113,19 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             apple.isAlive = false;
             score++;
         }
-        if (apple2.isAlive && apple2.hitbox.intersects(Snakey.hitbox)){
-            apple2.dx = -apple2.dx;
-            apple2.isAlive = false;
+        if (orange.isAlive && orange.hitbox.intersects(Snakey.hitbox)){
+            orange.dx = -orange.dx;
+            orange.isAlive = false;
             score++;
         }
-        if (Feathery.isAlive && Feathery.hitbox.intersects(Snakey.hitbox)){
-            Feathery.dx = -Feathery.dx;
-            Feathery.isAlive = false;
+        if (blueberry.isAlive && blueberry.hitbox.intersects(Snakey.hitbox)){
+            blueberry.dx = -blueberry.dx;
+            blueberry.isAlive = false;
             score++;
         }
-        if (apple3.isAlive && apple3.hitbox.intersects(Snakey.hitbox)){
-            apple3.dx = -apple3.dx;
-            apple3.isAlive = false;
+        if (lemon.isAlive && lemon.hitbox.intersects(Snakey.hitbox)){
+            lemon.dx = -lemon.dx;
+            lemon.isAlive = false;
             score++;
         }
 
@@ -169,51 +179,71 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 	//paints things on the screen using bufferStrategy
 	private void render() {
-		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-		g.clearRect(0, 0, WIDTH, HEIGHT);
+        Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+        g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draws the image of the background
-        g.drawImage(BackgroundPic, 0, 0,WIDTH, HEIGHT, null);
+        //draws the image of the background
+        g.drawImage(BackgroundPic, 0, 0, WIDTH, HEIGHT, null);
 
 
         //if objects are alive then draw their images, once they die make it so they dont show up on the screen
+
+
+        //always draw the spaceship because it never dies
+
+        g.drawImage(snakepic, Snakey.xpos, Snakey.ypos, Snakey.width, Snakey.height, null);
+
+
+        //the line below tells us that if all of the objects/characters are dead (except spaceship) then a new image should flash on the screen
+
+        if (apple.isAlive == false && orange.isAlive == false && lemon.isAlive == false && blueberry.isAlive == false) {
+            g.drawImage(Toolkit.getDefaultToolkit().getImage("GameOver.png"), 0, 0, 1000, 700, null);
+
+        }
+
         if (apple.isAlive) {
-            g.drawImage(applePic, apple.xpos, apple.ypos, apple.width, apple.height, null);
+            if (applesquished) {
+
+                g.drawImage(applePic, apple.xpos, apple.ypos + apple.height * 2 / 3, apple.width, apple.height / 3, null);
+            } else {
+                g.drawImage(applePic, apple.xpos, apple.ypos, apple.width, apple.height, null);
+            }
         }
 
-        if (apple2.isAlive) {
-            g.drawImage(apple2Pic, apple2.xpos, apple2.ypos, apple2.width, apple2.height, null);
+        if (orange.isAlive) {
+            if (orangesquished) {
+                g.drawImage(orangepic, orange.xpos, orange.ypos + orange.height * 2 / 3, orange.width, orange.height / 3, null);
+            } else {
+                g.drawImage(orangepic, orange.xpos, orange.ypos, orange.width, orange.height, null);
+            }
         }
-       if(apple3.isAlive) {
-           g.drawImage(apple3Pic, apple3.xpos, apple3.ypos, apple3.width, apple3.height, null);
-       }
-       if(Feathery.isAlive) {
-           g.drawImage(Featherpic, Feathery.xpos, Feathery.ypos, Feathery.width, Feathery.height, null);
-       }
+
+        if (lemon.isAlive) {
+            if (lemonsquished) {
+                g.drawImage(lemonpic, lemon.xpos, lemon.ypos + lemon.height * 2 / 3, lemon.width, lemon.height / 3, null);
+            } else {
+                g.drawImage(lemonpic, lemon.xpos, lemon.ypos, lemon.width, lemon.height, null);
+            }
+        }
 
 
-       //always draw the spaceship because it never dies
+            if (blueberry.isAlive) {
+                if (blueberrysquished) {
+                    g.drawImage(blueberrypic, blueberry.xpos, blueberry.ypos + blueberry.height * 2 / 3, blueberry.width, blueberry.height / 3, null);
+                } else {
+                    g.drawImage(blueberrypic, blueberry.xpos, blueberry.ypos, blueberry.width, blueberry.height, null);
+                }
+            }
 
-       g.drawImage(snakepic,Snakey.xpos, Snakey.ypos, Snakey.width, Snakey.height, null);
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Arial", Font.BOLD, 50));
+                g.drawString("Score:" + score, 20, 40);
+
+                g.dispose();
+                bufferStrategy.show();
+            }
 
 
-       //the line below tells us that if all of the objects/characters are dead (except spaceship) then a new image should flash on the screen
-
-       if (apple.isAlive == false && apple2.isAlive ==false && apple3.isAlive == false && Feathery.isAlive == false){
-           g.drawImage(Toolkit.getDefaultToolkit().getImage("GameOver.png"),0,0,1000,700, null);
-
-       }
-
-
-
-
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Arial", Font.BOLD,50));
-        g.drawString("Score:"+ score, 20, 40);
-
-        g.dispose();
-		bufferStrategy.show();
-	}
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -226,11 +256,11 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         //up arrow is 38
         if(e.getKeyCode() == 38){
             System.out.println("pressed up arrow");
-            Snakey.dy = -2;
+            Snakey.dy = -1;
         }
         if(e.getKeyCode() == 40){
             System.out.println("pressed down arrow");
-            Snakey.dy = -10;
+            Snakey.dy = 1;
         }
 
         if(e.getKeyCode() == 37){
@@ -252,7 +282,28 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+int mx = e.getX();
+int my = e.getY();
 
+
+//Intersection #2, if you click on the fruit then you squish it
+        if(apple.isAlive && apple.hitbox.contains(mx,my)){
+            applesquished = true;
+            score += 5;
+        }
+
+        if(orange.isAlive && orange.hitbox.contains(mx,my)){
+            orangesquished = true;
+            score += 5;
+        }
+        if(lemon.isAlive && lemon.hitbox.contains(mx,my)){
+            lemonsquished = true;
+            score += 5;
+        }
+        if(blueberry.isAlive && blueberry.hitbox.contains(mx,my)){
+            blueberrysquished = true;
+            score += 5;
+        }
     }
 
     @Override

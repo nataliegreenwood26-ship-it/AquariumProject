@@ -1,5 +1,5 @@
 import java.awt.*;
-public class apple3 {
+public class lemon {
 
         //VARIABLE DECLARATION SECTION
         //Here's where I state which variables I am going to use.
@@ -15,7 +15,7 @@ public class apple3 {
 
 
         //constructor
-       public apple3(int pXpos, int pYpos) {
+       public lemon(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
             dx =3;

@@ -1,5 +1,5 @@
 import java.awt.*;
-public class Feather {
+public class blueberry {
 
     //VARIABLE DECLARATION SECTION
     //Here's where I state which variables I am going to use.
@@ -14,7 +14,7 @@ public class Feather {
     public Rectangle hitbox; //made for collisions
 
     //constructor
-    public Feather(int pXpos, int pYpos) {
+    public blueberry(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
         dx = 2;
