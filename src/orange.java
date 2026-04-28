@@ -27,14 +27,14 @@ public class orange {
 
         }
 
-        //The move method.  Everytime this is run (or "called") the character's x position and y position change by dx and dy
+        //The move method.  Everytime this is run (or "called") the fruit's x position and y position change by dx and dy
         public void move() {
 
                 xpos = xpos + dx;
                 ypos = ypos + dy;
                 hitbox = new Rectangle(xpos, ypos, width, height);
 
-                //visual of the object bouncing off the walls by reversing direction (dx,dy) and looks like the character bounces.
+                //visual of the fruit bouncing off the walls by reversing direction (dx,dy) and looks like the fruit bounces.
 
                 if (xpos < 0) {
                     dx = -dx;

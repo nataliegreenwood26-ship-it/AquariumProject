@@ -17,12 +17,11 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 	final int WIDTH = 1000; //width of window
 	final int HEIGHT = 700; //height of window
-    int score = 0;
+    int score = 0; //score of the game
 
-    boolean applesquished = false;
-    boolean orangesquished = false;
-    boolean lemonsquished = false;
-    boolean blueberrysquished = false;
+
+    boolean[] squished = {false, false, false, false}; //array for squished fruit
+    //0 = apple, 1 = orange, 2 = lemon, 3 = blueberry
 
 
    //More variables declared
@@ -39,8 +38,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public Image blueberrypic;
     public Image snakepic;
 
-   //These are the characters in the game. Each one has an object that is made for them.
-	private apple1 apple;
+   //These are the characters/fruits in the game. Each one has an object that is made for them.
+	private apple apple;
     private orange orange;
     private lemon lemon;
     private blueberry blueberry;
@@ -73,11 +72,11 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         blueberrypic = Toolkit.getDefaultToolkit().getImage("blueberry.png"); //load the picture
         snakepic = Toolkit.getDefaultToolkit().getImage("snake.png"); //load the picture
 
-        apple = new apple1(200,350); //creates chickenlittle object at that position (500,300)
-        orange = new orange(randx, randy); //AbbyM appears somewhere random every single time the go button is pressed
-        lemon = new lemon (100,500); //creates Fish object at that position (100,500)
-        blueberry = new blueberry(400,200); //creates object at position shown
-        Snakey = new Snake(10,10); //creates object at position shown
+        apple = new apple(200,350); //creates apple object at that position (500,300)
+        orange = new orange(randx, randy); //the orange appears somewhere random every single time the go button is pressed
+        lemon = new lemon (100,500); //creates lemon object at that position (100,500)
+        blueberry = new blueberry(400,200); //creates blueberry object at position shown
+        Snakey = new Snake(10,10); //creates snake object at position shown
 
     }
 
@@ -99,14 +98,14 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
        if (orange.isAlive) orange.move();
        if (lemon.isAlive) lemon.move();
        if (blueberry.isAlive) blueberry.move();
-        Snakey.move(); //always moves spaceship
+        Snakey.move(); //always moves snake
         crashing(); //calls method
 
 	}
 
     public void crashing () {
-        //checks if any character hits the spaceship
-        // makes it so that when each character hits the spaceship they die
+        //checks if any of the fruit hit the snake
+        // makes it so that when each fruit hits the snake they die, and points are added
 
         if (apple.isAlive && apple.hitbox.intersects(Snakey.hitbox)) {
             apple.dx = -apple.dx;
@@ -186,41 +185,42 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         g.drawImage(BackgroundPic, 0, 0, WIDTH, HEIGHT, null);
 
 
-        //if objects are alive then draw their images, once they die make it so they dont show up on the screen
-
-
-        //always draw the spaceship because it never dies
+        //if fruits are alive then draw their images, once they die make it so they dont show up on the screen
+        //always draw the snake because it never dies
 
         g.drawImage(snakepic, Snakey.xpos, Snakey.ypos, Snakey.width, Snakey.height, null);
 
 
-        //the line below tells us that if all of the objects/characters are dead (except spaceship) then a new image should flash on the screen
+        //the line below tells us that if all of the objects/fruits are dead (except snake) then a new image should flash on the screen (game over)
 
         if (apple.isAlive == false && orange.isAlive == false && lemon.isAlive == false && blueberry.isAlive == false) {
-            g.drawImage(Toolkit.getDefaultToolkit().getImage("GameOver.png"), 0, 0, 1000, 700, null);
+            g.drawImage(Toolkit.getDefaultToolkit().getImage("gameover.png"), 0, 0, 1000, 700, null);
 
         }
 
-        if (apple.isAlive) {
-            if (applesquished) {
 
-                g.drawImage(applePic, apple.xpos, apple.ypos + apple.height * 2 / 3, apple.width, apple.height / 3, null);
+
+        //the lines below tell to draw the fruits flat if they are alive but squished
+        if (apple.isAlive) {
+            if (squished[0]) { //array used here from above
+
+                g.drawImage(applePic, apple.xpos, apple.ypos + apple.height * 2 / 3, apple.width, apple.height / 3, null); //squishes the fruit
             } else {
                 g.drawImage(applePic, apple.xpos, apple.ypos, apple.width, apple.height, null);
             }
         }
 
         if (orange.isAlive) {
-            if (orangesquished) {
-                g.drawImage(orangepic, orange.xpos, orange.ypos + orange.height * 2 / 3, orange.width, orange.height / 3, null);
+            if (squished[1]) { //array used here
+                g.drawImage(orangepic, orange.xpos, orange.ypos + orange.height * 2 / 3, orange.width, orange.height / 3, null); //squishes the fruit
             } else {
                 g.drawImage(orangepic, orange.xpos, orange.ypos, orange.width, orange.height, null);
             }
         }
 
         if (lemon.isAlive) {
-            if (lemonsquished) {
-                g.drawImage(lemonpic, lemon.xpos, lemon.ypos + lemon.height * 2 / 3, lemon.width, lemon.height / 3, null);
+            if (squished[2]) {
+                g.drawImage(lemonpic, lemon.xpos, lemon.ypos + lemon.height * 2 / 3, lemon.width, lemon.height / 3, null); //squishes the fruit
             } else {
                 g.drawImage(lemonpic, lemon.xpos, lemon.ypos, lemon.width, lemon.height, null);
             }
@@ -228,8 +228,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 
             if (blueberry.isAlive) {
-                if (blueberrysquished) {
-                    g.drawImage(blueberrypic, blueberry.xpos, blueberry.ypos + blueberry.height * 2 / 3, blueberry.width, blueberry.height / 3, null);
+                if (squished[3]) {
+                    g.drawImage(blueberrypic, blueberry.xpos, blueberry.ypos + blueberry.height * 2 / 3, blueberry.width, blueberry.height / 3, null); //squishes the fruit
                 } else {
                     g.drawImage(blueberrypic, blueberry.xpos, blueberry.ypos, blueberry.width, blueberry.height, null);
                 }
@@ -244,6 +244,37 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             }
 
 
+            public void resetgame(){ //this method is for when enter is clicked, how to reset the game
+
+                //bring all fruits back to life
+                apple.isAlive = true;
+                orange.isAlive = true;
+                lemon.isAlive = true;
+                blueberry.isAlive = true;
+
+                //unsquish all fruits
+                for(int x = 0; x < squished.length; x++) {
+                    squished[x] = false;
+                }
+
+
+                //make the fruits return to their starting positions
+                apple.xpos = 200;
+                apple.ypos = 100;
+                lemon.xpos = 100;
+                lemon.ypos = 500;
+                blueberry.xpos = 400;
+                blueberry.ypos = 200;
+                orange.xpos = (int)(Math.random()*999) + 1;
+                orange.ypos = (int)(Math.random()*699) + 1;
+
+
+
+                //reset score back to 0
+                score = 0;
+
+
+            }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -252,6 +283,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        //below is for the arrows to control the snake
         System.out.println("Key typed"+e.getKeyCode());
         //up arrow is 38
         if(e.getKeyCode() == 38){
@@ -273,6 +305,14 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             Snakey.dx = Math.abs(Snakey.dx);
         }
 
+        //below is for when to press enter to reset the game, go to the reset method above
+        if(e.getKeyCode() == 10){
+            if(!apple.isAlive && !orange.isAlive && !lemon.isAlive && !blueberry.isAlive){
+                resetgame();
+            }
+        }
+
+
     }
 
     @Override
@@ -282,26 +322,29 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+        //below is for the fruits to get squished when the mouse clicks it
 int mx = e.getX();
 int my = e.getY();
 
 
 //Intersection #2, if you click on the fruit then you squish it
         if(apple.isAlive && apple.hitbox.contains(mx,my)){
-            applesquished = true;
-            score += 5;
+            squished[0] = true; //when you click the box you squish the fruit
+            score += 5; //add five points to the score if you can squish them
         }
 
+        //same for the other fruits
         if(orange.isAlive && orange.hitbox.contains(mx,my)){
-            orangesquished = true;
+            squished[1] = true;
             score += 5;
         }
         if(lemon.isAlive && lemon.hitbox.contains(mx,my)){
-            lemonsquished = true;
+            squished[2] = true;
             score += 5;
         }
         if(blueberry.isAlive && blueberry.hitbox.contains(mx,my)){
-            blueberrysquished = true;
+            squished[3] = true;
             score += 5;
         }
     }

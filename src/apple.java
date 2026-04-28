@@ -1,6 +1,6 @@
 import java.awt.*;
-public class apple1 {
-    //name of the chickenlittle object class
+public class apple {
+    //name of the apple object class
 
     //VARIABLE DECLARATION SECTION
     //Here's where I state which variables I am going to use.
@@ -16,7 +16,7 @@ public class apple1 {
 
 
     // Constructor
-    public apple1(int pXpos, int pYpos) {
+    public apple(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
         dx =4 ;
@@ -34,7 +34,7 @@ public class apple1 {
             ypos = ypos + dy;
             hitbox = new Rectangle(xpos, ypos, width, height);
 
-        // visual of the object bouncing off the walls by reversing direction (dx,dy) and looks like the character bounces.
+        // visual of the object bouncing off the walls by reversing direction (dx,dy) and looks like the fruit bounces.
 
             if (xpos < 0) {
                 dx = -dx;
